@@ -11,6 +11,8 @@ const reducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_ACTIVE_TODO:
             return {
+                ...state,
+                activeTodo: action.payload,
                 error: null,
                 isLoading: false,
             };

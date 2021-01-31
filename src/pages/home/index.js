@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { CssBaseline, Grid, Card as MiniCard, CardActions, CardContent, Button, Typography } from '@material-ui/core';
+import { useDispatch } from 'react-redux';
 
 import Header from '../../components/Header/Header';
 import Card from '../../components/Card/Card';
@@ -7,11 +8,19 @@ import CardHeader from '../../components/Card/CardHeader';
 import CardBody from '../../components/Card/CardBody';
 import CardFooter from '../../components/Card/CardFooter';
 
+// redux store
+import { getActiveTodo } from '../../store/todo/action';
+
 // styles
 import useStyles from './styles';
 
 function Home(props) {
     const classes = useStyles();
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getActiveTodo());
+    }, []);
     return (
         <div className={classes.root}>
             <CssBaseline />

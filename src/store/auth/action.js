@@ -13,9 +13,7 @@ export const signinAction = (username, password, history) => {
             };
             const res = await axiosInstance.post(`${apiEndpoint.auth.host}${apiEndpoint.auth.endpoints.signin}`, data);
             if (res) {
-                console.log(res);
                 localStorage.setItem('token', res.data.data.data.signAccessToken);
-
                 history.push({ pathname: '/app/home' });
                 dispatch({ payload: res.data.data.data, type: LOGIN_SUCCESS });
             }
