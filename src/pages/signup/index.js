@@ -1,17 +1,13 @@
-import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Avatar, Button, CssBaseline, TextField, Link, Grid, Typography, Container, Box } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
+
+// styles
+import useStyles from './styles';
+
+// redux store
+import { signupAction } from '../../store/auth/action';
 
 function Copyright() {
     return (
@@ -26,28 +22,43 @@ function Copyright() {
     );
 }
 
-const useStyles = makeStyles((theme) => ({
-    paper: {
-        marginTop: theme.spacing(8),
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-    },
-    avatar: {
-        margin: theme.spacing(1),
-        backgroundColor: theme.palette.secondary.main,
-    },
-    form: {
-        width: '100%', // Fix IE 11 issue.
-        marginTop: theme.spacing(3),
-    },
-    submit: {
-        margin: theme.spacing(3, 0, 2),
-    },
-}));
-
-export default function SignUp() {
+export default function SignUp(props) {
+    const { history } = props;
     const classes = useStyles();
+    const dispatch = useDispatch();
+
+    const [{ firstName, lastName, email, password }, setUserDetails] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+    });
+
+    const onChangesValues = (e) => {
+        const inputId = e.target.id;
+        const { value } = e.target;
+        setUserDetails((oldState) => {
+            const newObj = {
+                ...oldState,
+                [inputId]: value,
+            };
+            return newObj;
+        });
+    };
+
+    const onsignupClick = () => {
+        console.log(firstName, lastName, email, password);
+        const data = {
+            firstName,
+            lastName,
+            email,
+            password,
+        };
+        dispatch(signupAction(data, history));
+    };
+    const onsigninClick = () => {
+        history.push('/auth/signin');
+    };
 
     return (
         <Container component="main" maxWidth="xs">
@@ -59,10 +70,12 @@ export default function SignUp() {
                 <Typography component="h1" variant="h5">
                     Sign up
                 </Typography>
-                <form className={classes.form} noValidate>
+                <div className={classes.form} noValidate>
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={6}>
                             <TextField
+                                value={firstName}
+                                onChange={(event) => onChangesValues(event)}
                                 autoComplete="fname"
                                 name="firstName"
                                 variant="outlined"
@@ -75,6 +88,8 @@ export default function SignUp() {
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
+                                value={lastName}
+                                onChange={(event) => onChangesValues(event)}
                                 variant="outlined"
                                 required
                                 fullWidth
@@ -86,6 +101,8 @@ export default function SignUp() {
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
+                                value={email}
+                                onChange={(event) => onChangesValues(event)}
                                 variant="outlined"
                                 required
                                 fullWidth
@@ -97,6 +114,8 @@ export default function SignUp() {
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
+                                value={password}
+                                onChange={(event) => onChangesValues(event)}
                                 variant="outlined"
                                 required
                                 fullWidth
@@ -107,24 +126,30 @@ export default function SignUp() {
                                 autoComplete="current-password"
                             />
                         </Grid>
-                        <Grid item xs={12}>
-                            <FormControlLabel
-                                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                                label="I want to receive inspiration, marketing promotions and updates via email."
-                            />
-                        </Grid>
                     </Grid>
-                    <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
+                    <Button
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        className={classes.submit}
+                        disabled={
+                            firstName.length === 0 ||
+                            lastName.length === 0 ||
+                            email.length === 0 ||
+                            password.length === 0
+                        }
+                        onClick={onsignupClick}
+                    >
                         Sign Up
                     </Button>
                     <Grid container justify="flex-end">
                         <Grid item>
-                            <Link href="#" variant="body2">
+                            <Link component="button" variant="body2" onClick={onsigninClick}>
                                 Already have an account? Sign in
                             </Link>
                         </Grid>
                     </Grid>
-                </form>
+                </div>
             </div>
             <Box mt={5}>
                 <Copyright />

@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, LOGIN_FAILURE } from './types';
+import { LOGIN_SUCCESS, LOGIN_FAILURE, SIGNUP_SUCCESS, SIGNUP_FAILURE } from './types';
 import axiosInstance from '../../lib/axiosService';
 import * as apiEndpoint from '../../config/apiEndPoints.json';
 
@@ -21,8 +21,19 @@ export const signinAction = (username, password, history) => {
     };
 };
 
-export const signupAction = (username, password, history) => {
-    return async (dispatch) => {};
+export const signupAction = (data, history) => {
+    return async (dispatch) => {
+        try {
+            const res = await axiosInstance.post(`${apiEndpoint.auth.host}${apiEndpoint.auth.endpoints.signup}`, data);
+            if (res) {
+                history.push({ pathname: '/auth/signin' });
+                dispatch({ type: SIGNUP_SUCCESS });
+            }
+        } catch (error) {
+            console.log(error);
+            dispatch({ type: SIGNUP_FAILURE });
+        }
+    };
 };
 
 export const logoutAction = (history) => {};

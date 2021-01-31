@@ -17,7 +17,7 @@ const reducer = (state = initialState, action) => {
         case LOGIN_FAILURE:
             return { ...state, isAuthenticated: false, error: true, isLoading: false };
         case SIGNUP_SUCCESS:
-            return { ...state, isAuthenticated: true, error: null, isLoading: false };
+            return { ...state, isAuthenticated: false, error: null, isLoading: false };
         case SIGNUP_FAILURE:
             return { ...state, isAuthenticated: false, error: true, isLoading: false };
         case LOGOUT_CLICK:

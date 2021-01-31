@@ -32,9 +32,10 @@ export default function SignIn(props) {
     const [password, setPassword] = useState('');
 
     const onLoginClick = () => {
-        console.log('inside login click');
-
         dispatch(signinAction(username, password, history));
+    };
+    const onsignupClick = () => {
+        history.push('/auth/signup');
     };
 
     return (
@@ -86,13 +87,9 @@ export default function SignIn(props) {
                         Sign In
                     </Button>
                     <Grid container>
-                        <Grid item xs>
-                            <Link href="#" variant="body2">
-                                Forgot password?
-                            </Link>
-                        </Grid>
+                        <Grid item xs />
                         <Grid item>
-                            <Link href="#" variant="body2">
+                            <Link component="button" variant="body2" onClick={onsignupClick}>
                                 Don't have an account? Sign Up
                             </Link>
                         </Grid>
