@@ -1,0 +1,18 @@
+{
+    "auth": {
+        "host": "http://localhost:3000/api",
+        "endpoints": {
+            "signin": "/user/signin",
+            "signup": "/user/signup"
+        }
+    },
+    "todo": {
+        "host": "/notification-service",
+        "endpoints": {
+            "create": "/v1/notifications",
+            "getAll": "/v1/notifications/admin",
+            "update": "/v1/notifications",
+            "delete": "/v1/notifications/"
+        }
+    }
+}

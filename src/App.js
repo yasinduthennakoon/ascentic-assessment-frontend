@@ -16,7 +16,7 @@ function App() {
                     exact
                     path="/"
                     render={(props) => {
-                        return <Redirect to="/auth" />;
+                        return <Redirect to="/app/home" />;
                     }}
                 />
                 <Route

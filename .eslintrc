@@ -55,15 +55,13 @@
         "object-shorthand": 0,
         "react/prop-types": 0,
         "no-unused-vars": "error",
-        "react-hooks/exhaustive-deps": "off"
+        "react-hooks/exhaustive-deps": "off",
+        "no-console": "off"
     },
     "settings": {
         "react": {
             "version": "detect" // Tells eslint-plugin-react to automatically detect the version of React to use
         },
         "import/extensions": [".js", ".jsx"]
-        // "import/parsers": {
-        //     "@typescript-eslint/parser": [".ts", ".tsx"]
-        // },
     }
 }
