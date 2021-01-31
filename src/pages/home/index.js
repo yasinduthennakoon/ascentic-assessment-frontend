@@ -107,13 +107,25 @@ function Home(props) {
                                                     </Typography>
                                                 </CardContent>
                                                 <CardActions>
-                                                    <Button onClick={() => onClickUpdateTodo(item._id)} size="small">
+                                                    <Button
+                                                        onClick={() => onClickUpdateTodo(item._id)}
+                                                        size="small"
+                                                        color="primary"
+                                                    >
                                                         Complete
                                                     </Button>
-                                                    <Button onClick={() => handleEditOpen(item)} size="small">
+                                                    <Button
+                                                        onClick={() => handleEditOpen(item)}
+                                                        size="small"
+                                                        color="primary"
+                                                    >
                                                         Edit
                                                     </Button>
-                                                    <Button onClick={() => onClickDeleteTodo(item._id)} size="small">
+                                                    <Button
+                                                        onClick={() => onClickDeleteTodo(item._id)}
+                                                        size="small"
+                                                        color="secondary"
+                                                    >
                                                         Remove
                                                     </Button>
                                                 </CardActions>
@@ -176,6 +188,7 @@ function Home(props) {
                                 <CardFooter>
                                     <Button
                                         onClick={() => onClickAddTodo()}
+                                        disabled={title.length === 0 || description.length === 0}
                                         variant="contained"
                                         color="primary"
                                         size="large"

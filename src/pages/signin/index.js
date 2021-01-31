@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Avatar, Button, CssBaseline, TextField, Link, Grid, Box, Typography, Container } from '@material-ui/core';
+import { Avatar, Button, CssBaseline, TextField, Link, Grid, Typography, Container } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
 // redux store
@@ -9,19 +9,6 @@ import { signinAction } from '../../store/auth/action';
 
 // styles
 import useStyles from './styles';
-
-function Copyright() {
-    return (
-        <Typography variant="body2" color="textSecondary" align="center">
-            {'Copyright © '}
-            <Link color="inherit" href="https://material-ui.com/">
-                Your Website
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
-}
 
 export default function SignIn(props) {
     const { history } = props;
@@ -96,9 +83,6 @@ export default function SignIn(props) {
                     </Grid>
                 </div>
             </div>
-            <Box mt={8}>
-                <Copyright />
-            </Box>
         </Container>
     );
 }
