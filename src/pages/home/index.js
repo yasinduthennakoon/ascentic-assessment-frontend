@@ -27,7 +27,7 @@ function Home(props) {
                                     <h4 className={classes.cardTitleWhite}>My Todos</h4>
                                 </CardHeader>
                                 <CardBody>
-                                    <Grid item spacing={3}>
+                                    <Grid item>
                                         <MiniCard className={classes.cardRoot}>
                                             <CardContent>
                                                 <Typography

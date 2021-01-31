@@ -4,12 +4,21 @@ const initialState = {
     isAuthenticated: false,
     error: false,
     isLoading: false,
+    firstName: '',
+    email: '',
+    userId: '',
 };
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case LOGIN_SUCCESS:
+            console.log(action.payload);
+
             return {
+                ...state,
+                firstName: action.payload.firstName,
+                email: action.payload.email,
+                userId: action.payload.userId,
                 isAuthenticated: true,
                 error: null,
                 isLoading: false,

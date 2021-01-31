@@ -1,13 +1,13 @@
 {
     "auth": {
-        "host": "http://localhost:3000/api",
+        "host": "http://localhost:5000/api",
         "endpoints": {
             "signin": "/user/signin",
             "signup": "/user/signup"
         }
     },
     "todo": {
-        "host": "http://localhost:3000/api",
+        "host": "http://localhost:5000/api",
         "endpoints": {
             "getActive": "/todo/getactive",
             "getAll": "/todo/getall",
