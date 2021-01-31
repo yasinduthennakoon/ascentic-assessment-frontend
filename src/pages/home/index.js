@@ -1,6 +1,8 @@
+/* eslint-disable no-underscore-dangle */
 import React, { useEffect } from 'react';
 import { CssBaseline, Grid, Card as MiniCard, CardActions, CardContent, Button, Typography } from '@material-ui/core';
-import { useDispatch } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import Header from '../../components/Header/Header';
 import Card from '../../components/Card/Card';
@@ -17,6 +19,8 @@ import useStyles from './styles';
 function Home(props) {
     const classes = useStyles();
     const dispatch = useDispatch();
+    const { todo } = props;
+    console.log(todo);
 
     useEffect(() => {
         dispatch(getActiveTodo());
@@ -36,33 +40,24 @@ function Home(props) {
                                     <h4 className={classes.cardTitleWhite}>My Todos</h4>
                                 </CardHeader>
                                 <CardBody>
-                                    <Grid item>
-                                        <MiniCard className={classes.cardRoot}>
-                                            <CardContent>
-                                                <Typography
-                                                    className={classes.title}
-                                                    color="textSecondary"
-                                                    gutterBottom
-                                                >
-                                                    Word of the Day
-                                                </Typography>
-                                                <Typography variant="h5" component="h2">
-                                                    test one
-                                                </Typography>
-                                                <Typography className={classes.pos} color="textSecondary">
-                                                    adjective
-                                                </Typography>
-                                                <Typography variant="body2" component="p">
-                                                    well meaning and kindly.
-                                                    <br />
-                                                    asdasdsadasd
-                                                </Typography>
-                                            </CardContent>
-                                            <CardActions>
-                                                <Button size="small">Learn More</Button>
-                                            </CardActions>
-                                        </MiniCard>
-                                    </Grid>
+                                    {todo.activeTodo.map((item) => {
+                                        return (
+                                            <MiniCard key={item._id} className={classes.cardRoot}>
+                                                <CardContent>
+                                                    <Typography variant="h5" component="h2">
+                                                        {item.title}
+                                                    </Typography>
+                                                    <Typography variant="body2" component="p">
+                                                        {item.description}
+                                                    </Typography>
+                                                </CardContent>
+                                                <CardActions>
+                                                    <Button size="small">Edit</Button>
+                                                    <Button size="small">Remove</Button>
+                                                </CardActions>
+                                            </MiniCard>
+                                        );
+                                    })}
                                 </CardBody>
                                 <CardFooter />
                             </Card>
@@ -88,4 +83,10 @@ function Home(props) {
     );
 }
 
-export default Home;
+const mapStateToProps = (state) => {
+    const { todo } = state;
+
+    return { todo };
+};
+
+export default connect(mapStateToProps)(withRouter(Home));
