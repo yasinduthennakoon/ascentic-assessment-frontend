@@ -1,5 +1,13 @@
 import remove from 'lodash/remove';
-import { GET_ACTIVE_TODO, GET_ALL_TODO, CREATE_TODO, UPDATE_TODO, DELETE_TODO, ACTION_FAIL } from './types';
+import {
+    GET_ACTIVE_TODO,
+    GET_ALL_TODO,
+    CREATE_TODO,
+    UPDATE_TODO,
+    DELETE_TODO,
+    COMPLETE_TODO,
+    ACTION_FAIL,
+} from './types';
 
 const initialState = {
     activeTodo: [],
@@ -24,6 +32,11 @@ const reducer = (state = initialState, action) => {
         case UPDATE_TODO:
             return { ...state, error: true, isLoading: false };
         case DELETE_TODO:
+            remove(state.activeTodo, {
+                _id: action.payload,
+            });
+            return { ...state, activeTodo: state.activeTodo };
+        case COMPLETE_TODO:
             remove(state.activeTodo, {
                 _id: action.payload,
             });
