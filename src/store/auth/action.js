@@ -1,6 +1,8 @@
+import axios from 'axios';
 import { LOGIN_SUCCESS, LOGIN_FAILURE, SIGNUP_SUCCESS, SIGNUP_FAILURE } from './types';
-import axiosInstance from '../../lib/axiosService';
 import * as apiEndpoint from '../../config/apiEndPoints.json';
+
+const axiosInstance = axios.create();
 
 export const signinAction = (username, password, history) => {
     return async (dispatch) => {
