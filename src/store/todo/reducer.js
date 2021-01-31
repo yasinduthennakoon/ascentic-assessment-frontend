@@ -19,7 +19,7 @@ const reducer = (state = initialState, action) => {
         case GET_ALL_TODO:
             return { ...state, error: true, isLoading: false };
         case CREATE_TODO:
-            return { ...state, error: null, isLoading: false };
+            return { ...state, activeTodo: [...state.activeTodo, action.payload], error: null, isLoading: false };
         case UPDATE_TODO:
             return { ...state, error: true, isLoading: false };
         case DELETE_TODO:

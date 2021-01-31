@@ -1,6 +1,15 @@
 /* eslint-disable no-underscore-dangle */
-import React, { useEffect } from 'react';
-import { CssBaseline, Grid, Card as MiniCard, CardActions, CardContent, Button, Typography } from '@material-ui/core';
+import React, { useState, useEffect } from 'react';
+import {
+    CssBaseline,
+    Grid,
+    Card as MiniCard,
+    CardActions,
+    CardContent,
+    Button,
+    Typography,
+    TextField,
+} from '@material-ui/core';
 import { connect, useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
@@ -11,7 +20,7 @@ import CardBody from '../../components/Card/CardBody';
 import CardFooter from '../../components/Card/CardFooter';
 
 // redux store
-import { getActiveTodo } from '../../store/todo/action';
+import { getActiveTodo, createTodo } from '../../store/todo/action';
 
 // styles
 import useStyles from './styles';
@@ -20,11 +29,23 @@ function Home(props) {
     const classes = useStyles();
     const dispatch = useDispatch();
     const { todo } = props;
-    console.log(todo);
+
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
 
     useEffect(() => {
         dispatch(getActiveTodo());
     }, []);
+
+    const onClickAddTodo = () => {
+        const data = {
+            title: title,
+            description: description,
+            activeStatus: true,
+        };
+        dispatch(createTodo(data));
+    };
+
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -71,8 +92,56 @@ function Home(props) {
                                 <CardHeader color="primary">
                                     <h4 className={classes.cardTitleWhite}>Add Todo</h4>
                                 </CardHeader>
-                                <CardBody>test</CardBody>
-                                <CardFooter />
+                                <CardBody>
+                                    <Grid item container xs={12} spacing={3}>
+                                        <Grid item xs={12}>
+                                            <TextField
+                                                id="title"
+                                                InputProps={{
+                                                    classes: {
+                                                        input: classes.textField,
+                                                    },
+                                                }}
+                                                value={title}
+                                                onChange={(e) => setTitle(e.target.value)}
+                                                margin="normal"
+                                                placeholder="Title"
+                                                variant="outlined"
+                                                type="text"
+                                                fullWidth
+                                            />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField
+                                                id="title"
+                                                InputProps={{
+                                                    classes: {
+                                                        input: classes.textField,
+                                                    },
+                                                }}
+                                                value={description}
+                                                onChange={(e) => setDescription(e.target.value)}
+                                                margin="normal"
+                                                placeholder="Description"
+                                                variant="outlined"
+                                                type="text"
+                                                multiline
+                                                rows={6}
+                                                fullWidth
+                                            />
+                                        </Grid>
+                                    </Grid>
+                                </CardBody>
+                                <CardFooter>
+                                    <Button
+                                        onClick={() => onClickAddTodo()}
+                                        variant="contained"
+                                        color="primary"
+                                        size="large"
+                                    >
+                                        Add Todo
+                                    </Button>
+                                </CardFooter>
                             </Card>
                         </Grid>
                         <Grid item xs={3} />
