@@ -1,15 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import { CssBaseline } from '@material-ui/core';
+
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import configureStore from './store/index';
+
 ReactDOM.render(
-    <React.Suspense>
-        <CssBaseline />
-        <App />
-    </React.Suspense>,
+    <Provider store={configureStore()}>
+        <React.Suspense>
+            <CssBaseline />
+            <App />
+        </React.Suspense>
+    </Provider>,
     document.getElementById('root'),
 );
 
