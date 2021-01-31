@@ -24,6 +24,29 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.background.default,
         padding: theme.spacing(3),
     },
+    modalPaper: {
+        position: 'absolute',
+        width: 400,
+        backgroundColor: theme.palette.background.paper,
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
+        [theme.breakpoints.up('xs')]: {
+            width: '100%',
+            height: '80%',
+        },
+        [theme.breakpoints.up('sm')]: {
+            width: '100%',
+            height: '80%',
+        },
+        [theme.breakpoints.up('md')]: {
+            width: '70%',
+            height: 'auto',
+        },
+        [theme.breakpoints.up('lg')]: {
+            width: '50%',
+            height: 'auto',
+        },
+    },
     cardTitleWhite: {
         color: '#FFFFFF',
         marginTop: '0px',

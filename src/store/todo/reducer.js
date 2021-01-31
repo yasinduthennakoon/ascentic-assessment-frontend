@@ -1,4 +1,6 @@
+/* eslint-disable no-underscore-dangle */
 import remove from 'lodash/remove';
+import findIndex from 'lodash/findIndex';
 import {
     GET_ACTIVE_TODO,
     GET_ALL_TODO,
@@ -29,18 +31,26 @@ const reducer = (state = initialState, action) => {
             return { ...state, error: true, isLoading: false };
         case CREATE_TODO:
             return { ...state, activeTodo: [...state.activeTodo, action.payload], error: null, isLoading: false };
-        case UPDATE_TODO:
-            return { ...state, error: true, isLoading: false };
-        case DELETE_TODO:
+        case UPDATE_TODO: {
+            const indexActiveTodo = findIndex(state.activeTodo, {
+                _id: action.payload._id,
+            });
+            const listActiveTodo = [...state.activeTodo];
+            listActiveTodo[indexActiveTodo] = action.payload;
+            return { ...state, activeTodo: listActiveTodo, error: true, isLoading: false };
+        }
+        case DELETE_TODO: {
             remove(state.activeTodo, {
                 _id: action.payload,
             });
             return { ...state, activeTodo: state.activeTodo };
-        case COMPLETE_TODO:
+        }
+        case COMPLETE_TODO: {
             remove(state.activeTodo, {
                 _id: action.payload,
             });
             return { ...state, activeTodo: state.activeTodo };
+        }
         case ACTION_FAIL:
             return { ...state };
         default:

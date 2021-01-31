@@ -22,6 +22,9 @@ import CardFooter from '../../components/Card/CardFooter';
 // redux store
 import { getActiveTodo, createTodo, deleteTodo, completeTodo } from '../../store/todo/action';
 
+// sub component
+import EditModal from './editModal';
+
 // styles
 import useStyles from './styles';
 
@@ -32,10 +35,31 @@ function Home(props) {
 
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
+    const [{ editModalOpen, editTitle, editDescription, todoId }, setEditModalDetails] = useState({
+        editModalOpen: false,
+        editTitle: '',
+        editDescription: '',
+        todoId: '',
+    });
 
     useEffect(() => {
         dispatch(getActiveTodo());
     }, []);
+
+    const handleEditOpen = (item) => {
+        setEditModalDetails({
+            editModalOpen: true,
+            editTitle: item.title,
+            editDescription: item.description,
+            todoId: item._id,
+        });
+    };
+
+    const onCloseEditModal = (status) => {
+        setEditModalDetails({
+            editModalOpen: status,
+        });
+    };
 
     const onClickAddTodo = () => {
         const data = {
@@ -85,7 +109,9 @@ function Home(props) {
                                                     <Button onClick={() => onClickUpdateTodo(item._id)} size="small">
                                                         Complete
                                                     </Button>
-                                                    <Button size="small">Edit</Button>
+                                                    <Button onClick={() => handleEditOpen(item)} size="small">
+                                                        Edit
+                                                    </Button>
                                                     <Button onClick={() => onClickDeleteTodo(item._id)} size="small">
                                                         Remove
                                                     </Button>
@@ -162,6 +188,13 @@ function Home(props) {
                     </Grid>
                 </Grid>
             </main>
+            <EditModal
+                editModalOpenStatus={editModalOpen}
+                title={editTitle}
+                description={editDescription}
+                id={todoId}
+                onClose={onCloseEditModal}
+            />
         </div>
     );
 }
