@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect } from 'react';
 import {
@@ -82,7 +83,7 @@ function Home(props) {
     return (
         <div className={classes.root}>
             <CssBaseline />
-            <Header headerText="My ToDO Application" />
+            <Header history={props.history} headerText="My ToDO Application" />
             <main className={classes.content}>
                 <div className={classes.toolbar} />
                 <Grid container spacing={3}>

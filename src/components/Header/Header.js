@@ -2,9 +2,10 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { useState, useEffect } from 'react';
-import { AppBar, Toolbar, IconButton, Menu, Typography } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Menu, Typography, Link } from '@material-ui/core';
 import { Person as AccountIcon } from '@material-ui/icons';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 // styles
 import useStyles from './styles';
@@ -18,22 +19,40 @@ function Header(props) {
 
     // local
     const [profileMenu, setProfileMenu] = useState(null);
-    const [name, setUserName] = useState('Yasindu');
-    const [email, setUserEmail] = useState('tyasindu@gmail.com');
+    const [name, setUserName] = useState('');
+    const [email, setUserEmail] = useState('');
 
-    const { userName: propUserName, userEmail: propUserEmail, headerText } = props;
+    const { auth, headerText } = props;
     useEffect(() => {
-        // setUserName(propUserName);
-        // setUserEmail(propUserEmail);
-    }, [propUserName, propUserEmail]);
+        setUserName(auth.firstName);
+        setUserEmail(auth.email);
+    }, [auth]);
+
+    const onClickHome = () => {
+        props.history.push('/app/home');
+    };
+    const onClickHistory = () => {
+        props.history.push('/app/history');
+    };
 
     return (
         <AppBar position="fixed" className={classes.appBar}>
             <Toolbar className={classes.toolbar}>
                 <Typography variant="h6" weight="medium" className={classes.logotype}>
-                    {headerText || 'My ToDO'}
+                    {headerText || 'My ToDo'}
                 </Typography>
                 <div className={classes.grow} />
+                <Link component="button" variant="body2" color="initial" onClick={onClickHome}>
+                    <Typography variant="h6" weight="medium" className={classes.barMenuIcon}>
+                        Home
+                    </Typography>
+                </Link>
+
+                <Link component="button" variant="body2" color="initial" onClick={onClickHistory}>
+                    <Typography variant="h6" weight="medium">
+                        History
+                    </Typography>
+                </Link>
                 <IconButton
                     aria-haspopup="true"
                     color="inherit"
@@ -71,4 +90,10 @@ function Header(props) {
     );
 }
 
-export default withRouter(Header);
+const mapStateToProps = (state) => {
+    const { auth } = state;
+
+    return { auth };
+};
+
+export default connect(mapStateToProps)(withRouter(Header));

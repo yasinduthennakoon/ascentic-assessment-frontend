@@ -157,4 +157,7 @@ export default makeStyles((theme) => ({
     sendButtonIcon: {
         marginLeft: theme.spacing(2),
     },
+    barMenuIcon: {
+        paddingRight: '15px',
+    },
 }));
