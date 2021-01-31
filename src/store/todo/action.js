@@ -55,7 +55,7 @@ export const deleteTodo = (id) => {
 
             if (res) {
                 dispatch({
-                    payload: res.data.data.data,
+                    payload: id,
                     type: DELETE_TODO,
                 });
             }

@@ -20,7 +20,7 @@ import CardBody from '../../components/Card/CardBody';
 import CardFooter from '../../components/Card/CardFooter';
 
 // redux store
-import { getActiveTodo, createTodo } from '../../store/todo/action';
+import { getActiveTodo, createTodo, deleteTodo } from '../../store/todo/action';
 
 // styles
 import useStyles from './styles';
@@ -44,6 +44,9 @@ function Home(props) {
             activeStatus: true,
         };
         dispatch(createTodo(data));
+    };
+    const onClickDeleteTodo = (id) => {
+        dispatch(deleteTodo(id));
     };
 
     return (
@@ -74,7 +77,9 @@ function Home(props) {
                                                 </CardContent>
                                                 <CardActions>
                                                     <Button size="small">Edit</Button>
-                                                    <Button size="small">Remove</Button>
+                                                    <Button onClick={() => onClickDeleteTodo(item._id)} size="small">
+                                                        Remove
+                                                    </Button>
                                                 </CardActions>
                                             </MiniCard>
                                         );
