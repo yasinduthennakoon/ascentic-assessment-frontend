@@ -1,13 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { CssBaseline } from '@material-ui/core';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-    <React.StrictMode>
+    <React.Suspense>
+        <CssBaseline />
         <App />
-    </React.StrictMode>,
+    </React.Suspense>,
     document.getElementById('root'),
 );
 
