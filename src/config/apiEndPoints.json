@@ -7,10 +7,10 @@
         }
     },
     "todo": {
-        "host": "/notification-service",
+        "host": "http://localhost:3000/api",
         "endpoints": {
-            "create": "/v1/notifications",
-            "getAll": "/v1/notifications/admin",
+            "getActive": "/todo/getactive",
+            "getAll": "/todo/getall",
             "update": "/v1/notifications",
             "delete": "/v1/notifications/"
         }
