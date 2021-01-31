@@ -1,5 +1,5 @@
 import React from 'react';
-import { CssBaseline } from '@material-ui/core';
+import { CssBaseline, Grid } from '@material-ui/core';
 
 import Header from '../../components/Header/Header';
 
@@ -12,6 +12,17 @@ function Home(props) {
         <div className={classes.root}>
             <CssBaseline />
             <Header headerText="My ToDO Application" />
+            <main className={classes.content}>
+                <div className={classes.toolbar} />
+                <Grid container spacing={3}>
+                    <Grid item container xs={12} spacing={3}>
+                        part 01
+                    </Grid>
+                    <Grid item container xs={12} spacing={3}>
+                        part 02
+                    </Grid>
+                </Grid>
+            </main>
         </div>
     );
 }
