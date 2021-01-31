@@ -1,0 +1,68 @@
+{
+    "parser": "babel-eslint",
+    "plugins": ["prettier", "react", "import"],
+    "extends": [
+        "airbnb",
+        // "eslint:recommended"
+        "react-app",
+        "eslint:recommended",
+        "plugin:import/errors",
+        "plugin:import/warnings",
+
+        "plugin:react/recommended",
+        "plugin:json/recommended-with-comments",
+        "plugin:prettier/recommended",
+        "prettier",
+        "prettier/react"
+    ],
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es6": true,
+        "jest": true,
+        "node": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 2018,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "rules": {
+        "jsx-a11y/href-no-hash": ["off"],
+        "react/jsx-filename-extension": [
+            "warn",
+            {
+                "extensions": [".js", ".jsx"]
+            }
+        ],
+        "max-len": [
+            "warn",
+            {
+                "code": 120,
+                "tabWidth": 4,
+                "comments": 100,
+                "ignoreComments": false,
+                "ignoreTrailingComments": true,
+                "ignoreUrls": true,
+                "ignoreStrings": true,
+                "ignoreTemplateLiterals": true,
+                "ignoreRegExpLiterals": true
+            }
+        ],
+        "import/extensions": 0,
+        "object-shorthand": 0,
+        "react/prop-types": 0,
+        "no-unused-vars": "error"
+    },
+    "settings": {
+        "react": {
+            "version": "detect" // Tells eslint-plugin-react to automatically detect the version of React to use
+        },
+        "import/extensions": [".js", ".jsx"]
+        // "import/parsers": {
+        //     "@typescript-eslint/parser": [".ts", ".tsx"]
+        // },
+    }
+}
