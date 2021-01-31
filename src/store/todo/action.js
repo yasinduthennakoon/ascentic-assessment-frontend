@@ -1,4 +1,12 @@
-import { GET_ACTIVE_TODO, CREATE_TODO, DELETE_TODO, COMPLETE_TODO, UPDATE_TODO, ACTION_FAIL } from './types';
+import {
+    GET_ACTIVE_TODO,
+    CREATE_TODO,
+    DELETE_TODO,
+    COMPLETE_TODO,
+    UPDATE_TODO,
+    GET_ALL_TODO,
+    ACTION_FAIL,
+} from './types';
 import axiosInstance from '../../lib/axiosService';
 import * as apiEndpoint from '../../config/apiEndPoints.json';
 
@@ -22,9 +30,16 @@ export const getActiveTodo = () => {
 export const getAllTodo = () => {
     return async (dispatch) => {
         try {
-            console.log('test');
+            const res = await axiosInstance.get(`${apiEndpoint.todo.host}${apiEndpoint.todo.endpoints.getAll}`);
+            if (res) {
+                dispatch({
+                    payload: res.data.data.data,
+                    type: GET_ALL_TODO,
+                });
+            }
         } catch (error) {
             console.log(error);
+            dispatch({ type: ACTION_FAIL });
         }
     };
 };
