@@ -54,7 +54,8 @@
         "import/extensions": 0,
         "object-shorthand": 0,
         "react/prop-types": 0,
-        "no-unused-vars": "error"
+        "no-unused-vars": "error",
+        "react-hooks/exhaustive-deps": "off"
     },
     "settings": {
         "react": {
