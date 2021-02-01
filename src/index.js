@@ -1,14 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { CssBaseline } from '@material-ui/core';
+
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import configureStore from './store/index';
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <Provider store={configureStore()}>
+        <React.Suspense>
+            <CssBaseline />
+            <App />
+        </React.Suspense>
+    </Provider>,
+    document.getElementById('root'),
 );
 
 // If you want to start measuring performance in your app, pass a function
