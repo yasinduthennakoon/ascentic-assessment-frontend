@@ -15,8 +15,8 @@ export default function SignIn(props) {
     const classes = useStyles();
     const dispatch = useDispatch();
 
-    const [username, setUsername] = useState('tyasindu@gmail.com');
-    const [password, setPassword] = useState('Admin@1234');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
 
     const onLoginClick = () => {
         dispatch(signinAction(username, password, history));
