@@ -5,6 +5,11 @@ This project was Todo Application using React JS and material-ui framework
 
 In the project directory, you can run:
 
+### `yarn`
+
+Install the npm packages.\
+After clone your local machine run this command to install all the dependency.
+
 ### `yarn start`
 
 Runs the app in the development mode.\
